@@ -1,449 +1,785 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modul Pembelajaran Excel - SUM & AVERAGE</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f7f6;
-        }
-        header {
-            background-color: #107c41; /* Warna Khas Excel */
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: #107c41;
-            border-bottom: 2px solid #107c41;
-            padding-bottom: 5px;
-            margin-top: 0;
-        }
-        h3 {
-            color: #0b582e;
-            margin-bottom: 5px;
-        }
-        code {
-            background-color: #eef9f3;
-            color: #107c41;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-family: 'Consolas', monospace;
-        }
-        .alert {
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
-            padding: 12px 15px;
-            margin-top: 15px;
-            border-radius: 0 4px 4px 0;
-        }
-        
-        /* Excel Formula Bar UI */
-        .excel-bar {
-            display: flex;
-            align-items: center;
-            background: #f3f3f3;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 6px 12px;
-            margin-bottom: 15px;
-            font-family: 'Consolas', monospace;
-        }
-        .cell-address {
-            font-weight: bold;
-            color: #107c41;
-            width: 50px;
-            border-right: 1px solid #ccc;
-            padding-right: 10px;
-        }
-        .formula-input {
-            flex-grow: 1;
-            padding-left: 10px;
-            color: #000;
-            font-weight: bold;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Informatika: Belajar Rumus Dasar Excel</title>
+  <style>
+    :root {
+      --primary: #107c41; /* Warna Khas Excel */
+      --primary-dark: #0b582e;
+      --bg-light: #f3f2f1;
+      --border-color: #d1d1d1;
+    }
 
-        /* Styling Tabel */
-        .table-container {
-            overflow-x: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: white;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #e6e6e6;
-            color: #333;
-            font-weight: bold;
-        }
-        th.col-header {
-            background-color: #107c41;
-            color: white;
-        }
-        
-        /* Interactive Table Classes */
-        #excelTable {
-            user-select: none;
-        }
-        #excelTable td.editable {
-            background-color: #ffffff;
-            cursor: pointer;
-        }
-        #excelTable td.formula-cell {
-            background-color: #fff9e6;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        #excelTable td.selected {
-            outline: 2px solid #107c41;
-            background-color: #eef9f3 !important;
-        }
-        
-        .btn-copy {
-            background-color: #107c41;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .btn-copy:hover {
-            background-color: #0b582e;
-        }
-        .hint {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 10px;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            font-weight: bold;
-        }
-        .badge-success { background: #d4edda; color: #155724; }
-        .badge-pending { background: #fff3cd; color: #856404; }
-    </style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-light);
+      color: #333;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      color: var(--primary);
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 {
+      color: var(--primary-dark);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    /* Penjelasan Konsep Dasar */
+    .intro-box {
+      background: #e8f5e9;
+      border-left: 5px solid var(--primary);
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .intro-box ul {
+      margin: 5px 0 0 20px;
+      padding: 0;
+    }
+
+    /* Section Materi Grid */
+    .materi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      border-top: 4px solid var(--primary);
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
+      margin: 0 0 8px 0;
+      color: var(--primary-dark);
+      font-size: 18px;
+    }
+
+    .card code {
+      background: #e1dfdd;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+      color: #000;
+      font-size: 13px;
+    }
+
+    .card p {
+      margin: 8px 0;
+      font-size: 13px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .card .example {
+      font-size: 12px;
+      background: #fff;
+      border: 1px dashed var(--border-color);
+      padding: 6px;
+      border-radius: 4px;
+      margin-top: 8px;
+    }
+
+    /* Steps Guide */
+    .steps-list {
+      background: #fafafa;
+      padding: 15px 20px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 25px;
+    }
+
+    .steps-list ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .steps-list li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    /* Simulasi Formula Bar Excel */
+    .formula-bar-container {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      margin-bottom: 15px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .cell-address {
+      background: #e1dfdd;
+      padding: 8px 12px;
+      font-weight: bold;
+      min-width: 40px;
+      text-align: center;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .fx-symbol {
+      padding: 8px 10px;
+      font-weight: bold;
+      font-style: italic;
+      color: #666;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .formula-input {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      outline: none;
+      font-family: monospace;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    /* Tabel Excel Styling */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border-color);
+      text-align: center;
+      padding: 8px;
+    }
+
+    th {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* Header Kolom Excel (A, B, C...) */
+    tr.excel-header th {
+      background-color: #e1dfdd;
+      color: #333;
+      font-size: 12px;
+      padding: 4px;
+    }
+
+    /* Header Baris Excel (1, 2, 3...) */
+    td.excel-row-num {
+      background-color: #e1dfdd;
+      font-weight: bold;
+      color: #555;
+      width: 30px;
+    }
+
+    input.cell-input {
+      width: 90%;
+      border: 1px solid transparent;
+      text-align: center;
+      font-family: inherit;
+      font-size: 14px;
+      background: transparent;
+    }
+
+    input.cell-input:focus {
+      outline: 2px solid var(--primary);
+      background: #fff;
+    }
+
+    .bg-calculated {
+      background-color: #e8f5e9;
+      font-weight: bold;
+    }
+
+    .bg-stat {
+      background-color: #f0f4f8;
+      font-weight: bold;
+    }
+
+    .selected-cell {
+      outline: 2px solid var(--primary) !important;
+    }
+
+    .instructions {
+      font-size: 13px;
+      color: #666;
+      margin-top: 15px;
+      background: #fff8e1;
+      padding: 12px;
+      border-radius: 4px;
+      border-left: 4px solid #ffb300;
+    }
+
+    /* Quiz Section Styling */
+    .quiz-section {
+      background: #fdfdfd;
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      border-radius: 6px;
+      margin-top: 25px;
+    }
+
+    .quiz-item {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .quiz-item label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .quiz-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .btn-submit {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .feedback {
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .feedback.correct {
+      color: #2e7d32;
+    }
+
+    .feedback.incorrect {
+      color: #c62828;
+    }
+
+    /* Section Raw Table Copas */
+    .copas-section {
+      margin-top: 30px;
+      background: #fafafa;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+    }
+
+    .copas-table {
+      background: #fff;
+      margin-top: 10px;
+    }
+
+    .copas-table th {
+      background-color: #444;
+    }
+
+    .copas-table td, .copas-table th {
+      text-align: left;
+      padding: 8px 12px;
+    }
+
+    .btn-copy {
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      font-size: 13px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .btn-copy:hover {
+      background-color: #005a9e;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Kelas Informatika: Pengolahan Data Excel</h1>
-        <p>Materi & Praktikum Interaktif: Menghitung Total dan Rata-Rata Nilai dengan <code>SUM</code> & <code>AVERAGE</code></p>
-    </header>
+<div class="container">
+  <h1>📊 Modul Interaktif Excel: Mengolah Data Nilai</h1>
+  
+  <div class="intro-box">
+    <strong>💡 Konsep Dasar Pengolahan Data di Excel:</strong>
+    <ul>
+      <li>Setiap rumus di Microsoft Excel <strong>WAJIB diawali dengan tanda sama dengan (<code>=</code>)</strong>. Jika tidak, Excel akan menganggapnya sebagai teks biasa.</li>
+      <li><strong>Rentang Sel (Range):</strong> Menggunakan tanda titik dua (<code>:</code>) untuk menghubungkan sel awal hingga sel akhir. Contoh: <code>C1:G1</code> berarti mencakup sel C1, D1, E1, F1, dan G1.</li>
+    </ul>
+  </div>
 
-    <!-- BAHAN AJAR LENGKAP -->
+  <h2>📚 Rangkuman Fungsi Utama</h2>
+  <div class="materi-grid">
     <div class="card">
-        <h2>1. Bahan Ajar & Penjelasan Fungsi</h2>
-        <p>Dalam Microsoft Excel atau Google Sheets, kita menggunakan <strong>Fungsi (Formula)</strong> untuk mengolah data angka secara otomatis.</p>
+      <h3>1. SUM (Penjumlahan)</h3>
+      <code>=SUM(sel_awal:sel_akhir)</code>
+      <p>Digunakan untuk menjumlahkan seluruh nilai angka dalam suatu rentang sel.</p>
+      <div class="example"><strong>Contoh:</strong> <code>=SUM(C1:G1)</code> menjumlahkan semua nilai milik Andi.</div>
+    </div>
+    <div class="card">
+      <h3>2. AVERAGE (Rata-Rata)</h3>
+      <code>=AVERAGE(sel_awal:sel_akhir)</code>
+      <p>Digunakan untuk menghitung nilai rata-rata aritmatika dari sekumpulan sel.</p>
+      <div class="example"><strong>Contoh:</strong> <code>=AVERAGE(C1:G1)</code> menghitung rata-rata nilai Andi.</div>
+    </div>
+    <div class="card">
+      <h3>3. MAX (Nilai Tertinggi)</h3>
+      <code>=MAX(sel_awal:sel_akhir)</code>
+      <p>Digunakan untuk mencari nilai angka terbesar dari rentang yang dipilih.</p>
+      <div class="example"><strong>Contoh:</strong> <code>=MAX(C1:C5)</code> mencari nilai B.Indo paling tinggi.</div>
+    </div>
+    <div class="card">
+      <h3>4. MIN (Nilai Terendah)</h3>
+      <code>=MIN(sel_awal:sel_akhir)</code>
+      <p>Digunakan untuk mencari nilai angka terkecil dari rentang yang dipilih.</p>
+      <div class="example"><strong>Contoh:</strong> <code>=MIN(C1:C5)</code> mencari nilai B.Indo paling rendah.</div>
+    </div>
+  </div>
+
+  <h2>🛠️ Cara Menggunakan Rumus pada Praktik</h2>
+  <div class="steps-list">
+    <ol>
+      <li>Klik pada sel tempat hasil kalkulasi akan ditampilkan (misalnya sel <strong>H1</strong> untuk Total Nilai Andi).</li>
+      <li>Ketikkan rumus yang sesuai, contoh: <code>=SUM(C1:G1)</code>.</li>
+      <li>Tekan tombol <strong>Enter</strong> pada keyboard untuk mengeksekusi rumus.</li>
+    </ol>
+  </div>
+
+  <h2>💻 Simulasi Lembar Kerja Excel Interaktif</h2>
+
+  <div class="formula-bar-container">
+    <div class="cell-address" id="cellAddress">A1</div>
+    <div class="fx-symbol">fx</div>
+    <input type="text" class="formula-input" id="formulaDisplay" readonly placeholder="Klik pada sel di tabel untuk melihat isi/rumusnya">
+  </div>
+
+  <div class="table-container">
+    <table id="excelTable">
+      <thead>
+        <tr class="excel-header">
+          <th></th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+          <th>G</th>
+          <th>H</th>
+          <th>I</th>
+        </tr>
+        <tr>
+          <th>#</th>
+          <th>No</th>
+          <th>Nama</th>
+          <th>B. Indo</th>
+          <th>Matematika</th>
+          <th>IPA</th>
+          <th>IPS</th>
+          <th>Informatika</th>
+          <th>Total</th>
+          <th>Rata-rata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-row="1">
+          <td class="excel-row-num">1</td>
+          <td>1</td>
+          <td>Andi</td>
+          <td><input type="number" class="cell-input val" value="80" data-col="C"></td>
+          <td><input type="number" class="cell-input val" value="75" data-col="D"></td>
+          <td><input type="number" class="cell-input val" value="85" data-col="E"></td>
+          <td><input type="number" class="cell-input val" value="90" data-col="F"></td>
+          <td><input type="number" class="cell-input val" value="88" data-col="G"></td>
+          <td class="bg-calculated total" data-col="H" data-formula="=SUM(C1:G1)">0</td>
+          <td class="bg-calculated avg" data-col="I" data-formula="=AVERAGE(C1:G1)">0</td>
+        </tr>
+        <tr data-row="2">
+          <td class="excel-row-num">2</td>
+          <td>2</td>
+          <td>Budi</td>
+          <td><input type="number" class="cell-input val" value="70" data-col="C"></td>
+          <td><input type="number" class="cell-input val" value="80" data-col="D"></td>
+          <td><input type="number" class="cell-input val" value="75" data-col="E"></td>
+          <td><input type="number" class="cell-input val" value="85" data-col="F"></td>
+          <td><input type="number" class="cell-input val" value="90" data-col="G"></td>
+          <td class="bg-calculated total" data-col="H" data-formula="=SUM(C2:G2)">0</td>
+          <td class="bg-calculated avg" data-col="I" data-formula="=AVERAGE(C2:G2)">0</td>
+        </tr>
+        <tr data-row="3">
+          <td class="excel-row-num">3</td>
+          <td>3</td>
+          <td>Rita</td>
+          <td><input type="number" class="cell-input val" value="80" data-col="C"></td>
+          <td><input type="number" class="cell-input val" value="85" data-col="D"></td>
+          <td><input type="number" class="cell-input val" value="88" data-col="E"></td>
+          <td><input type="number" class="cell-input val" value="70" data-col="F"></td>
+          <td><input type="number" class="cell-input val" value="" placeholder="0" data-col="G"></td>
+          <td class="bg-calculated total" data-col="H" data-formula="=SUM(C3:G3)">0</td>
+          <td class="bg-calculated avg" data-col="I" data-formula="=AVERAGE(C3:G3)">0</td>
+        </tr>
+        <tr data-row="4">
+          <td class="excel-row-num">4</td>
+          <td>4</td>
+          <td>Jojo</td>
+          <td><input type="number" class="cell-input val" value="90" data-col="C"></td>
+          <td><input type="number" class="cell-input val" value="85" data-col="D"></td>
+          <td><input type="number" class="cell-input val" value="95" data-col="E"></td>
+          <td><input type="number" class="cell-input val" value="80" data-col="F"></td>
+          <td><input type="number" class="cell-input val" value="" placeholder="0" data-col="G"></td>
+          <td class="bg-calculated total" data-col="H" data-formula="=SUM(C4:G4)">0</td>
+          <td class="bg-calculated avg" data-col="I" data-formula="=AVERAGE(C4:G4)">0</td>
+        </tr>
+        <tr data-row="5">
+          <td class="excel-row-num">5</td>
+          <td>5</td>
+          <td>Anit</td>
+          <td><input type="number" class="cell-input val" value="100" data-col="C"></td>
+          <td><input type="number" class="cell-input val" value="90" data-col="D"></td>
+          <td><input type="number" class="cell-input val" value="88" data-col="E"></td>
+          <td><input type="number" class="cell-input val" value="80" data-col="F"></td>
+          <td><input type="number" class="cell-input val" value="" placeholder="0" data-col="G"></td>
+          <td class="bg-calculated total" data-col="H" data-formula="=SUM(C5:G5)">0</td>
+          <td class="bg-calculated avg" data-col="I" data-formula="=AVERAGE(C5:G5)">0</td>
+        </tr>
+
+        <tr data-row="6">
+          <td class="excel-row-num">6</td>
+          <td colspan="2" class="bg-stat">Nilai Tertinggi (MAX)</td>
+          <td class="bg-stat max" data-col="C" data-formula="=MAX(C1:C5)">0</td>
+          <td class="bg-stat max" data-col="D" data-formula="=MAX(D1:D5)">0</td>
+          <td class="bg-stat max" data-col="E" data-formula="=MAX(E1:E5)">0</td>
+          <td class="bg-stat max" data-col="F" data-formula="=MAX(F1:F5)">0</td>
+          <td class="bg-stat max" data-col="G" data-formula="=MAX(G1:G5)">0</td>
+          <td class="bg-stat" colspan="2">-</td>
+        </tr>
+        <tr data-row="7">
+          <td class="excel-row-num">7</td>
+          <td colspan="2" class="bg-stat">Nilai Terendah (MIN)</td>
+          <td class="bg-stat min" data-col="C" data-formula="=MIN(C1:C5)">0</td>
+          <td class="bg-stat min" data-col="D" data-formula="=MIN(D1:D5)">0</td>
+          <td class="bg-stat min" data-col="E" data-formula="=MIN(E1:E5)">0</td>
+          <td class="bg-stat min" data-col="F" data-formula="=MIN(F1:F5)">0</td>
+          <td class="bg-stat min" data-col="G" data-formula="=MIN(G1:G5)">0</td>
+          <td class="bg-stat" colspan="2">-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="instructions">
+    💡 <strong>Petunjuk Interaksi:</strong>
+    <ul>
+      <li>Isilah kolom nilai yang kosong (Informatika) untuk mengamati pembaruan data secara <i>Live Calculation</i>.</li>
+      <li>Klik sel manapun pada tabel untuk mengecek alamat sel dan struktur penulisan rumus pada <strong>Formula Bar</strong>.</li>
+    </ul>
+  </div>
+
+  <h2>📝 Studi Kasus & Kuis Pemahaman Rumus</h2>
+  <div class="quiz-section">
+    <form id="quizForm">
+      <div class="quiz-item">
+        <label for="q1">1. Tuliskan rumus Excel untuk menghitung Total Nilai milik Rita (berada di sel H3):</label>
+        <input type="text" id="q1" class="quiz-input" placeholder="Contoh: =SUM(...)">
+        <div id="fb1" class="feedback"></div>
+      </div>
+
+      <div class="quiz-item">
+        <label for="q2">2. Tuliskan rumus Excel untuk mencari Nilai Tertinggi pelajaran Matematika (berada di sel D6):</label>
+        <input type="text" id="q2" class="quiz-input" placeholder="Contoh: =MAX(...)">
+        <div id="fb2" class="feedback"></div>
+      </div>
+
+      <div class="quiz-item">
+        <label for="q3">3. Tuliskan rumus Excel untuk mencari Nilai Terendah pelajaran IPA (berada di sel E7):</label>
+        <input type="text" id="q3" class="quiz-input" placeholder="Contoh: =MIN(...)">
+        <div id="fb3" class="feedback"></div>
+      </div>
+
+      <button type="button" class="btn-submit" onclick="checkAnswers()">Periksa Jawaban</button>
+    </form>
+  </div>
+
+  <h2>📋 Tabel Latihan Praktik (Siap Copas ke MS Excel)</h2>
+  <div class="copas-section">
+    <p style="font-size: 14px; margin-top: 0;">Gunakan tombol di bawah ini atau sorot (blok) tabel lalu tekan <code>Ctrl+C</code> untuk menyalin data berikut langsung ke aplikasi <strong>Microsoft Excel</strong> di komputer Anda:</p>
+    <button class="btn-copy" onclick="copyTableToClipboard()">📋 Salin Tabel ke Clipboard</button>
+    
+    <div class="table-container">
+      <table class="copas-table" id="rawTable">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>B. Indo</th>
+            <th>Matematika</th>
+            <th>IPA</th>
+            <th>IPS</th>
+            <th>Informatika</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Andi</td>
+            <td>80</td>
+            <td>75</td>
+            <td>85</td>
+            <td>90</td>
+            <td>88</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Budi</td>
+            <td>70</td>
+            <td>80</td>
+            <td>75</td>
+            <td>85</td>
+            <td>90</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Rita</td>
+            <td>80</td>
+            <td>85</td>
+            <td>88</td>
+            <td>70</td>
+            <td>82</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Jojo</td>
+            <td>90</td>
+            <td>85</td>
+            <td>95</td>
+            <td>80</td>
+            <td>78</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Anit</td>
+            <td>100</td>
+            <td>90</td>
+            <td>88</td>
+            <td>80</td>
+            <td>85</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function calculateExcel() {
+    const rows = document.querySelectorAll('tbody tr[data-row="1"], tbody tr[data-row="2"], tbody tr[data-row="3"], tbody tr[data-row="4"], tbody tr[data-row="5"]');
+    
+    // Matriks untuk menyimpan nilai mata pelajaran per kolom (C, D, E, F, G)
+    const colValues = { C: [], D: [], E: [], F: [], G: [] };
+
+    // 1. Kalkulasi SUM dan AVERAGE per Siswa (Baris 1 - 5)
+    rows.forEach(row => {
+      const inputs = row.querySelectorAll('.val');
+      let sum = 0;
+      let count = 0;
+
+      inputs.forEach(input => {
+        const val = parseFloat(input.value);
+        const col = input.getAttribute('data-col');
+
+        if (!isNaN(val)) {
+          sum += val;
+          count++;
+          colValues[col].push(val);
+        }
+      });
+
+      // Set Total (SUM)
+      const totalCell = row.querySelector('.total');
+      totalCell.textContent = sum;
+
+      // Set Rata-Rata (AVERAGE)
+      const avgCell = row.querySelector('.avg');
+      const avg = count > 0 ? (sum / count).toFixed(1) : 0;
+      avgCell.textContent = avg.toString().replace('.', ',');
+    });
+
+    // 2. Kalkulasi MAX dan MIN per Mata Pelajaran (Kolom C - G)
+    ['C', 'D', 'E', 'F', 'G'].forEach(col => {
+      const values = colValues[col];
+      const maxCell = document.querySelector(`.max[data-col="${col}"]`);
+      const minCell = document.querySelector(`.min[data-col="${col}"]`);
+
+      if (values.length > 0) {
+        maxCell.textContent = Math.max(...values);
+        minCell.textContent = Math.min(...values);
+      } else {
+        maxCell.textContent = 0;
+        minCell.textContent = 0;
+      }
+    });
+  }
+
+  // Interaktivitas Formula Bar
+  function setupFormulaBar() {
+    const formulaDisplay = document.getElementById('formulaDisplay');
+    const cellAddress = document.getElementById('cellAddress');
+
+    document.querySelectorAll('#excelTable td').forEach(td => {
+      td.addEventListener('click', function() {
+        // Hapus highlight sel sebelumnya
+        document.querySelectorAll('.selected-cell').forEach(el => el.classList.remove('selected-cell'));
         
-        <h3>A. Fungsi SUM (Total)</h3>
-        <p>Fungsi <code>SUM</code> digunakan untuk menjumlahkan sekumpulan angka dalam rentang sel (range) tertentu.</p>
-        <p><strong>Sintaks:</strong> <code>=SUM(sel_awal:sel_akhir)</code></p>
-        <p><em>Contoh untuk Andi:</em> Jika nilai B. Indo sampai Informatika berada di sel <code>C2</code> sampai <code>G2</code>, maka rumusnya adalah <code>=SUM(C2:G2)</code>.</p>
+        this.classList.add('selected-cell');
 
-        <h3>B. Fungsi AVERAGE (Rata-Rata)</h3>
-        <p>Fungsi <code>AVERAGE</code> digunakan untuk mencari nilai rata-rata dari sekelompok data angka.</p>
-        <p><strong>Sintaks:</strong> <code>=AVERAGE(sel_awal:sel_akhir)</code></p>
-        <p><em>Contoh untuk Andi:</em> Untuk mencari rata-rata nilai Andi dari sel <code>C2</code> sampai <code>G2</code>, rumusnya adalah <code>=AVERAGE(C2:G2)</code>.</p>
-
-        <div class="alert">
-            <strong>Tips Guru:</strong> Jangan meletakkan tanda koma atau titik secara manual di dalam rumus range. Cukup gunakan tanda titik dua (<code>:</code>) yang berarti "sampai dengan".
-        </div>
-    </div>
-
-    <!-- TABEL SIMULASI INTERAKTIF -->
-    <div class="card">
-        <h2>2. Tabel Simulasi Interaktif (Contoh)</h2>
-        <p class="hint">💡 <strong>Fitur Interaktif:</strong> Klik sel mana saja untuk melihat <strong>Formula Bar</strong> di atas tabel. Kamu juga bisa merubah angka nilai di dalam tabel untuk melihat nilai Total & Rata-rata berubah secara otomatis!</p>
+        const row = this.parentElement.getAttribute('data-row');
+        const col = this.getAttribute('data-col') || (this.querySelector('input') ? this.querySelector('input').getAttribute('data-col') : '');
         
-        <!-- Formula Bar Excel -->
-        <div class="excel-bar">
-            <div class="cell-address" id="cellAddress">A1</div>
-            <div class="formula-input" id="formulaValue">Klik salah satu sel di tabel...</div>
-        </div>
-
-        <div class="table-container">
-            <table id="excelTable">
-                <thead>
-                    <tr>
-                        <th class="col-header">No</th>
-                        <th class="col-header">Nama</th>
-                        <th class="col-header">B. Indo (C)</th>
-                        <th class="col-header">Matematika (D)</th>
-                        <th class="col-header">IPA (E)</th>
-                        <th class="col-header">IPS (F)</th>
-                        <th class="col-header">Informatika (G)</th>
-                        <th class="col-header">Total (H)</th>
-                        <th class="col-header">Rata-rata (I)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Baris 1: Andi -->
-                    <tr>
-                        <td>1</td>
-                        <td>Andi</td>
-                        <td class="editable" data-address="C2" contenteditable="true">80</td>
-                        <td class="editable" data-address="D2" contenteditable="true">75</td>
-                        <td class="editable" data-address="E2" contenteditable="true">85</td>
-                        <td class="editable" data-address="F2" contenteditable="true">90</td>
-                        <td class="editable" data-address="G2" contenteditable="true">88</td>
-                        <td class="formula-cell" data-address="H2" data-formula="=SUM(C2:G2)">418</td>
-                        <td class="formula-cell" data-address="I2" data-formula="=AVERAGE(C2:G2)">83.6</td>
-                    </tr>
-                    <!-- Baris 2: Budi -->
-                    <tr>
-                        <td>2</td>
-                        <td>Budi</td>
-                        <td class="editable" data-address="C3" contenteditable="true">70</td>
-                        <td class="editable" data-address="D3" contenteditable="true">80</td>
-                        <td class="editable" data-address="E3" contenteditable="true">75</td>
-                        <td class="editable" data-address="F3" contenteditable="true">85</td>
-                        <td class="editable" data-address="G3" contenteditable="true">90</td>
-                        <td class="formula-cell" data-address="H3" data-formula="=SUM(C3:G3)">400</td>
-                        <td class="formula-cell" data-address="I3" data-formula="=AVERAGE(C3:G3)">80</td>
-                    </tr>
-                    <!-- Baris 3: Rita -->
-                    <tr>
-                        <td>3</td>
-                        <td>Rita</td>
-                        <td class="editable" data-address="C4" contenteditable="true">80</td>
-                        <td class="editable" data-address="D4" contenteditable="true">85</td>
-                        <td class="editable" data-address="E4" contenteditable="true">88</td>
-                        <td class="editable" data-address="F4" contenteditable="true">70</td>
-                        <td class="editable" data-address="G4" contenteditable="true">90</td>
-                        <td class="formula-cell" data-address="H4" data-formula="=SUM(C4:G4)">413</td>
-                        <td class="formula-cell" data-address="I4" data-formula="=AVERAGE(C4:G4)">82.6</td>
-                    </tr>
-                    <!-- Baris 4: Jojo -->
-                    <tr>
-                        <td>4</td>
-                        <td>Jojo</td>
-                        <td class="editable" data-address="C5" contenteditable="true">90</td>
-                        <td class="editable" data-address="D5" contenteditable="true">85</td>
-                        <td class="editable" data-address="E5" contenteditable="true">95</td>
-                        <td class="editable" data-address="F5" contenteditable="true">80</td>
-                        <td class="editable" data-address="G5" contenteditable="true">85</td>
-                        <td class="formula-cell" data-address="H5" data-formula="=SUM(C5:G5)">435</td>
-                        <td class="formula-cell" data-address="I5" data-formula="=AVERAGE(C5:G5)">87</td>
-                    </tr>
-                    <!-- Baris 5: Anit -->
-                    <tr>
-                        <td>5</td>
-                        <td>Anit</td>
-                        <td class="editable" data-address="C6" contenteditable="true">100</td>
-                        <td class="editable" data-address="D6" contenteditable="true">90</td>
-                        <td class="editable" data-address="E6" contenteditable="true">88</td>
-                        <td class="editable" data-address="F6" contenteditable="true">80</td>
-                        <td class="editable" data-address="G6" contenteditable="true">92</td>
-                        <td class="formula-cell" data-address="H6" data-formula="=SUM(C6:G6)">450</td>
-                        <td class="formula-cell" data-address="I6" data-formula="=AVERAGE(C6:G6)">90</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- CEK PEMAHAMAN RUMUS -->
-    <div class="card">
-        <h2>3. Uji Pemahaman Rumus</h2>
-        <p>Ketik rumus Excel yang tepat untuk menghitung <strong>Total Nilai Rita (Sel H4)</strong>:</p>
-        <input type="text" id="quizInput" placeholder="Contoh: =SUM(C4:G4)" style="padding: 8px; width: 50%; font-family: monospace;">
-        <button onclick="checkQuiz()" style="padding: 8px 15px; background: #107c41; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Cek Rumus</button>
-        <span id="quizResult" style="margin-left: 10px;"></span>
-    </div>
-
-    <!-- TABEL LATIHAN SISWA (SIAP COPAS KE EXCEL) -->
-    <div class="card">
-        <h2>4. Tabel Latihan Siswa (Salin ke Excel)</h2>
-        <p>Klik tombol di bawah untuk menyalin seluruh tabel latihan ini, lalu lakukan <strong>Paste (Ctrl + V)</strong> pada lembar kerja Microsoft Excel kalian di rumah/laboratorium!</p>
-        
-        <button class="btn-copy" onclick="copyPracticeTable()">📋 Salin Tabel Latihan ke Excel</button>
-
-        <div class="table-container">
-            <table id="practiceTable">
-                <thead>
-                    <tr>
-                        <th class="col-header">No</th>
-                        <th class="col-header">Nama</th>
-                        <th class="col-header">B. Indo</th>
-                        <th class="col-header">Matematika</th>
-                        <th class="col-header">IPA</th>
-                        <th class="col-header">IPS</th>
-                        <th class="col-header">Informatika</th>
-                        <th class="col-header">Total</th>
-                        <th class="col-header">Rata-rata</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Tina</td>
-                        <td>80</td>
-                        <td>75</td>
-                        <td>85</td>
-                        <td>90</td>
-                        <td>88</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Bila</td>
-                        <td>70</td>
-                        <td>85</td>
-                        <td>75</td>
-                        <td>85</td>
-                        <td>90</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Reza</td>
-                        <td>80</td>
-                        <td>85</td>
-                        <td>85</td>
-                        <td>70</td>
-                        <td>70</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Dio</td>
-                        <td>90</td>
-                        <td>85</td>
-                        <td>95</td>
-                        <td>80</td>
-                        <td>90</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Azka</td>
-                        <td>100</td>
-                        <td>90</td>
-                        <td>95</td>
-                        <td>80</td>
-                        <td>100</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="alert" style="margin-top: 20px;">
-            <strong>Instruksi Tugas:</strong>
-            <ol style="margin-bottom: 0; padding-left: 20px;">
-                <li>Salin tabel latihan di atas ke Excel.</li>
-                <li>Isi kolom <strong>Total</strong> dengan fungsi <code>=SUM(...)</code>.</li>
-                <li>Isi kolom <strong>Rata-rata</strong> dengan fungsi <code>=AVERAGE(...)</code>.</li>
-            </ol>
-        </div>
-    </div>
-
-    <script>
-        // Interaksi Highlight Sel & Formula Bar pada Tabel Simulasi
-        const table = document.getElementById('excelTable');
-        const cellAddressEl = document.getElementById('cellAddress');
-        const formulaValueEl = document.getElementById('formulaValue');
-
-        table.addEventListener('click', function(e) {
-            const target = e.target;
-            if (target.tagName === 'TD') {
-                document.querySelectorAll('#excelTable td').forEach(td => td.classList.remove('selected'));
-                target.classList.add('selected');
-
-                const address = target.getAttribute('data-address') || 'Sel';
-                cellAddressEl.textContent = address;
-
-                if (target.hasAttribute('data-formula')) {
-                    formulaValueEl.textContent = target.getAttribute('data-formula');
-                } else {
-                    formulaValueEl.textContent = target.innerText;
-                }
-            }
-        });
-
-        // Kalkulasi Otomatis (Live Calculation) pada Tabel Simulasi
-        table.addEventListener('input', function(e) {
-            const row = e.target.parentElement;
-            if (row.tagName === 'TR') {
-                recalculateRow(row);
-            }
-        });
-
-        function recalculateRow(row) {
-            const editables = row.querySelectorAll('.editable');
-            let sum = 0;
-            let count = 0;
-
-            editables.forEach(td => {
-                const val = parseFloat(td.innerText);
-                if (!isNaN(val)) {
-                    sum += val;
-                    count++;
-                }
-            });
-
-            const totalCell = row.querySelector('td[data-formula^="=SUM"]');
-            const avgCell = row.querySelector('td[data-formula^="=AVERAGE"]');
-
-            if (totalCell) totalCell.innerText = sum;
-            if (avgCell) avgCell.innerText = count > 0 ? (sum / count).toFixed(1) : 0;
+        if (col && row) {
+          cellAddress.textContent = `${col}${row}`;
         }
 
-        // Fitur Cek Rumus Kuis
-        function checkQuiz() {
-            const input = document.getElementById('quizInput').value.trim().toUpperCase();
-            const result = document.getElementById('quizResult');
+        // Tampilkan Rumus atau Nilai
+        const formula = this.getAttribute('data-formula');
+        const input = this.querySelector('input');
 
-            if (input === '=SUM(C4:G4)') {
-                result.innerHTML = '<span class="status-badge badge-success">✓ Benar! Rumus tepat.</span>';
-            } else {
-                result.innerHTML = '<span class="status-badge badge-pending">❌ Kurang tepat. Gunakan format =SUM(C4:G4)</span>';
-            }
+        if (formula) {
+          formulaDisplay.value = formula;
+        } else if (input) {
+          formulaDisplay.value = input.value;
+        } else {
+          formulaDisplay.value = this.innerText;
         }
+      });
+    });
+  }
 
-        // Fitur Copy Tabel Latihan ke Clipboard untuk Excel
-        function copyPracticeTable() {
-            const practiceTable = document.getElementById('practiceTable');
-            const range = document.createRange();
-            range.selectNode(practiceTable);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            alert("Tabel Latihan (Tina, Bila, Reza, Dio, Azka) berhasil disalin! Buka Excel lalu tekan Ctrl+V.");
-        }
-    </script>
+  // Fungsi Pengecekan Jawaban Kuis
+  function checkAnswers() {
+    // Normalisasi input (menghapus spasi berlebih dan diubah ke huruf besar)
+    const q1 = document.getElementById('q1').value.replace(/\s+/g, '').toUpperCase();
+    const q2 = document.getElementById('q2').value.replace(/\s+/g, '').toUpperCase();
+    const q3 = document.getElementById('q3').value.replace(/\s+/g, '').toUpperCase();
+
+    const fb1 = document.getElementById('fb1');
+    const fb2 = document.getElementById('fb2');
+    const fb3 = document.getElementById('fb3');
+
+    // Soal 1: =SUM(C3:G3)
+    if (q1 === '=SUM(C3:G3)') {
+      fb1.textContent = '✅ Benar!';
+      fb1.className = 'feedback correct';
+    } else {
+      fb1.textContent = '❌ Salah. Jawaban yang tepat: =SUM(C3:G3)';
+      fb1.className = 'feedback incorrect';
+    }
+
+    // Soal 2: =MAX(D1:D5)
+    if (q2 === '=MAX(D1:D5)') {
+      fb2.textContent = '✅ Benar!';
+      fb2.className = 'feedback correct';
+    } else {
+      fb2.textContent = '❌ Salah. Jawaban yang tepat: =MAX(D1:D5)';
+      fb2.className = 'feedback incorrect';
+    }
+
+    // Soal 3: =MIN(E1:E5)
+    if (q3 === '=MIN(E1:E5)') {
+      fb3.textContent = '✅ Benar!';
+      fb3.className = 'feedback correct';
+    } else {
+      fb3.textContent = '❌ Salah. Jawaban yang tepat: =MIN(E1:E5)';
+      fb3.className = 'feedback incorrect';
+    }
+  }
+
+  // Fungsi Salin Tabel ke Clipboard
+  function copyTableToClipboard() {
+    const table = document.getElementById('rawTable');
+    let range, selection;
+
+    if (document.createRange && window.getSelection) {
+      range = document.createRange();
+      selection = window.getSelection();
+      selection.removeAllRanges();
+      try {
+        range.selectNodeContents(table);
+        selection.addRange(range);
+      } catch (e) {
+        range.selectNode(table);
+        selection.addRange(range);
+      }
+      document.execCommand('copy');
+      selection.removeAllRanges();
+      alert('Tabel berhasil disalin! Buka Microsoft Excel lalu tekan Ctrl+V untuk menempelkan data.');
+    }
+  }
+
+  // Event Listener untuk Perubahan Input Data
+  document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('val')) {
+      calculateExcel();
+      
+      // Update Formula bar jika sel yang sedang diisi sedang dipilih
+      const parentTd = e.target.parentElement;
+      if (parentTd.classList.contains('selected-cell')) {
+        document.getElementById('formulaDisplay').value = e.target.value;
+      }
+    }
+  });
+
+  // Jalankan kalkulasi pertama kali saat halaman dimuat
+  window.onload = () => {
+    calculateExcel();
+    setupFormulaBar();
+  };
+</script>
+
 </body>
 </html>
